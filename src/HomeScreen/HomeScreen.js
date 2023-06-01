@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native'; // Alteração aqui
+import { View, Text, Button, ScrollView, Image } from 'react-native';
 import { addFavorite } from '../FavoritesScreen/favorites';
 import { fetchMovies } from '../service/api';
 
@@ -27,18 +27,21 @@ export default function HomeScreen({ navigation }) {
     };
 
     return (
-        <View>
-            <Text>Lista de Filmes:</Text>
-            {movies.map(movie => (
-                <View key={movie.id}>
-                    <Text>{movie.title}</Text>
-                    <Button
-                        title="Adicionar aos Favoritos"
-                        onPress={() => handleAddFavorite(movie)}
-                    />
-                </View>
-            ))}
-
-        </View>
+        <ScrollView>
+            <View>
+                <Text>Lista de Filmes:</Text>
+                {movies.map(movie => (
+                    <View key={movie.id}>
+                        <Text>{movie.title}</Text>
+                        <Text>Visão Geral: {movie.overview}</Text>
+                        <Text>Média de votos: {movie.vote_average}</Text>
+                        <Button
+                            title="Adicionar aos Favoritos"
+                            onPress={() => handleAddFavorite(movie)}
+                        />
+                    </View>
+                ))}
+            </View>
+        </ScrollView>
     );
 }

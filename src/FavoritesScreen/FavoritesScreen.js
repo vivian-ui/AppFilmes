@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button, ScrollView } from 'react-native';
 import { getFavorites, removeFavorite } from './favorites';
-import { Button } from 'react-native';
 
 export default function FavoritesScreen({ navigation }) {
     const [favorites, setFavorites] = useState([]);
@@ -41,17 +40,21 @@ export default function FavoritesScreen({ navigation }) {
     }, []);
 
     return (
-        <View>
-            <Text>Filmes Favoritos:</Text>
-            {favorites.map((movie) => (
-                <View key={movie.id}>
-                    <Text>{movie.title}</Text>
-                    <Button
-                        title="Remover dos Favoritos"
-                        onPress={() => handleRemoveFavorite(movie.id)}
-                    />
-                </View>
-            ))}
-        </View>
+        <ScrollView>
+            <View>
+                <Text>Filmes Favoritos:</Text>
+                {favorites.map((movie) => (
+                    <View key={movie.id}>
+                        <Text>Título: {movie.title}</Text>
+                        <Text>Visão Geral: {movie.overview}</Text>
+                        <Text>Média de votos: {movie.vote_average}</Text>
+                        <Button
+                            title="Remover dos Favoritos"
+                            onPress={() => handleRemoveFavorite(movie.id)}
+                        />
+                    </View>
+                ))}
+            </View>
+        </ScrollView>
     );
 }
